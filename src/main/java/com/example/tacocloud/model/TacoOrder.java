@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @Data
-public class TacoOrderDomain {
+public class TacoOrder {
     private String deliveryName;
     private String deliveryStreet;
     private String deliveryCity;
@@ -14,9 +14,9 @@ public class TacoOrderDomain {
     private String ccExpiration;
     private String ccCVV;
 
-    private List<TacoDomain> tacos = new ArrayList<>();
+    private List<Taco> tacos = new ArrayList<>();
 
-    public void addTaco(TacoDomain taco){
+    public void addTaco(Taco taco){
         tacos.add(taco);
     }
 }

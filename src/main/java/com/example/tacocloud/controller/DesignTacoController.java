@@ -12,15 +12,15 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 
-import lombok.extern.slf4j.Slf4j;
-
-import com.example.tacocloud.model.IngredientDomain;
-import com.example.tacocloud.model.IngredientDomain.Type;
-import com.example.tacocloud.model.TacoDomain;
-import com.example.tacocloud.model.TacoOrderDomain;
 
 
-@Slf4j
+import com.example.tacocloud.model.Ingredient;
+import com.example.tacocloud.model.Ingredient.Type;
+import com.example.tacocloud.model.Taco;
+import com.example.tacocloud.model.TacoOrder;
+
+
+
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
@@ -30,22 +30,22 @@ public class DesignTacoController {
     @ModelAttribute
     public void addIngredients(Model model) {
         
-        List<IngredientDomain> ingredients = Arrays.asList(
+        List<Ingredient> ingredients = Arrays.asList(
 
-        new IngredientDomain("FLTO", "Flour Tortilla", Type.WRAP),
-        new IngredientDomain("COTO", "Corn Tortilla", Type.WRAP),
-        new IngredientDomain("GRBF", "Ground Beef", Type.PROTEIN),
-        new IngredientDomain("CARN", "Carnitas", Type.PROTEIN),
-        new IngredientDomain("TMTO", "Diced Tomatoes", Type.VEGGIES),
-        new IngredientDomain("LETC", "Lettuce", Type.VEGGIES),
-        new IngredientDomain("CHED", "Cheddar", Type.CHEESE),
-        new IngredientDomain("JACK", "Monterrey Jack", Type.CHEESE),
-        new IngredientDomain("SLSA", "Salsa", Type.SAUCE),
-        new IngredientDomain("SRCR", "Sour Cream", Type.SAUCE)
+        new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
+        new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
+        new Ingredient("GRBF", "Ground Beef", Type.PROTEIN),
+        new Ingredient("CARN", "Carnitas", Type.PROTEIN),
+        new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
+        new Ingredient("LETC", "Lettuce", Type.VEGGIES),
+        new Ingredient("CHED", "Cheddar", Type.CHEESE),
+        new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
+        new Ingredient("SLSA", "Salsa", Type.SAUCE),
+        new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
         );
 
         
-        Type[] types = IngredientDomain.Type.values();
+        Type[] types = Ingredient.Type.values();
 
         for(Type type:types) {
             model.addAttribute(type.toString(), filterType(ingredients, type));
@@ -56,13 +56,13 @@ public class DesignTacoController {
     }   
 
         @ModelAttribute(name="tacoOrder")
-        public TacoOrderDomain order() {
-            return new TacoOrderDomain();
+        public TacoOrder order() {
+            return new TacoOrder();
         }
 
         @ModelAttribute(name="taco")
-        public TacoDomain taco(){ 
-            return new TacoDomain();
+        public Taco taco(){ 
+            return new Taco();
         }
 
         @GetMapping
@@ -72,7 +72,7 @@ public class DesignTacoController {
 
         
 
-    private Iterable<IngredientDomain> filterType(List<IngredientDomain> ingridients, Type type) {
+    private Iterable<Ingredient> filterType(List<Ingredient> ingridients, Type type) {
         return ingridients
                     .stream()
                     .filter(ing -> ing.getType().equals(type))
