@@ -2,6 +2,7 @@ package com.example.tacocloud.model;
 import java.util.Arrays;
 import java.util.Collection;
 
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Table(name="users")
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 @RequiredArgsConstructor
-public class User   {
+public class User   implements UserDetails{
     
     private static final long serialVersionUID = 1L;
 
@@ -40,26 +41,26 @@ public class User   {
     private final String zip;
     private final String phoneNumber;
 
-    // @Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(
             new SimpleGrantedAuthority("ROLE_USER")
         );
     }
 
-    // @Override
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-    // @Override
+    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
-    // @Override
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
-    // @Override
+    @Override
     public boolean isEnabled() {
         return true;
     }
