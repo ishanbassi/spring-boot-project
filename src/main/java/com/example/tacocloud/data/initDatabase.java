@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.example.tacocloud.model.Ingredient;
 import com.example.tacocloud.model.Taco;
 import com.example.tacocloud.model.TacoOrder;
+import com.example.tacocloud.model.User;
 import com.example.tacocloud.model.Ingredient.Type;
 import com.example.tacocloud.repository.IngredientRepository;
 import com.example.tacocloud.repository.OrderRepository;
@@ -55,6 +56,7 @@ public class InitDatabase {
     Ingredient  monterreyJack = new Ingredient("JACK", "Monterrey Jack", Type.CHEESE);
     Ingredient  salsa = new Ingredient("SLSA", "Salsa", Type.SAUCE);
     Ingredient  sourCream = new Ingredient("SRCR", "Sour Cream", Type.SAUCE);
+    Ingredient  testIngredient = new Ingredient("TEST", "Sour Cream", Type.SAUCE);
 
 
          repo.save(flourTortilla);
@@ -67,6 +69,7 @@ public class InitDatabase {
         repo.save(monterreyJack);
         repo.save(salsa);
         repo.save(sourCream);
+        repo.save(testIngredient);
 
         Taco taco1 = new Taco();
         taco1.setName("Carnivore");
@@ -113,6 +116,12 @@ public class InitDatabase {
 
 
          
+         User user1   = new User("ishan", "Ish@n20pp", "ISHAN BASSI", "HAIBOWAL", "LUDHIANA", "PUNJAB", "141001", "6239771006");
+
+         User user2 = new User("admin", "Ish@n20pp", "ISHAN BASSI", "HAIBOWAL", "LUDHIANA", "PUNJAB", "141001", "6239771006");
+
+         userRepo.save(user1);
+         userRepo.save(user2);
         
 
     };

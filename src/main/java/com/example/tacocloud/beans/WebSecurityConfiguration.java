@@ -1,24 +1,30 @@
 package com.example.tacocloud.beans;
 
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.example.tacocloud.repository.UserRepository;
 
 
 @Configuration
 public class WebSecurityConfiguration {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf(AbstractHttpConfigurer::disable);
+    @Bean  
+    SecurityFilterChain basicSecurity(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+                .formLogin((form) -> form.permitAll())
+                .build();
+    }
 
-        return  http.build();
-            
-            
-        
+    @Bean
+    UserDetailsService userDetailsService(UserRepository userRepo) {
+            return username -> userRepo.findByUsername(username);
     }
 
 }

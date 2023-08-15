@@ -7,3 +7,12 @@ spring:
         rest:
             base-path: /data-api
             
+    logging:
+        level:
+            org:
+                springframework:
+                    security:
+                        web:
+                            FilterChainProxy: DEBUG
+
+            

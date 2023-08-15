@@ -3,6 +3,7 @@ import lombok.Data;
 import java.util.List;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -20,6 +21,7 @@ import java.util.Date;
 
 @Data
 @Entity
+@RestResource(path = "/orders", rel="orders")
 public class TacoOrder  implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
